@@ -1,0 +1,206 @@
+
+
+$font: "Sarabun", sans-serif; 
+
+$rectangles: 'first' 250px 20px -105px 60px -webkit-linear-gradient(45deg, rgba(192,228,255,1) 0%, rgba(113,151,255,1) 100%) right,
+            'second' 190px 15px 205px 50px -webkit-linear-gradient(45deg, rgba(175,199,248,1) 0%, rgba(124,186,248,1) 100%) left,
+            'third' 300px 28px -95px 215px -webkit-linear-gradient(45deg, rgba(176,222,248,1) 0%, rgba(113,181,250,1) 100%) right
+            'fourth' 395px 33px -80px 350px -webkit-linear-gradient(45deg, rgba(171,202,254,1) 0%, rgba(186,118,246,1) 100%) right,
+            'fifth' 215px 19px 210px 175px -webkit-linear-gradient(45deg, rgba(197,185,249,1) 0%, rgba(158,145,252,1) 100%) left,
+            'sixth' 215px 18px 215px 287px -webkit-linear-gradient(45deg, rgba(187,171,253,1) 0%, rgba(110,92,251,1) 100%) left,
+            'seventh' 530px 45px -210px 110px -webkit-linear-gradient(45deg, rgba(171,231,253,1) 0%, rgba(148,188,255,1) 100%) right;
+body {
+    overflow: hidden;
+    margin: 0;
+}
+
+.icard {
+    border-radius: 0.141cm;
+    box-shadow: 0 13px 70px rgba(0,0,0,0.25);
+    width: 300px;
+    height: 360px;
+    background-color: #FFFFFF;
+    z-index: auto;
+    position: relative;
+    animation-name: cardAnimation;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+.llbutton-frame {
+    margin: 20px auto 0;
+    width: 190px;
+    height: 57px;
+}
+
+.llbutton {
+    background-color: rgb( 129, 129, 129 );
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    border-radius: 0.141cm;
+    width: 190px;
+    height: 57px;
+    margin: 23% 30px 0 auto;
+    cursor: pointer;
+    color: #fff;
+    font-family: $font;
+    font-size: 29px;
+    font-weight: 300;
+    border-top: 0px solid;
+    padding: 8px 48px 14px 48px;
+    text-decoration: none;
+}
+
+.llbutton:hover {
+    background-color: rgb(120, 120, 120);
+}
+
+.dbutton-frame {
+    width: 190px;
+    height: 57px;
+    margin: 20px auto 0;
+}
+
+.dbutton {
+    background-color: rgb( 109, 143, 240 );
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    border-radius: 0.141cm;
+    cursor: pointer;
+    margin: 0px;
+    width: 190px;
+    height: 57px;
+    padding: 37px 20px 4px 30px
+}
+
+.dbutton:hover {
+    background-color: rgb(105, 110, 240);
+}
+
+.dbutton img {
+    width: 130px;
+    top: 50%;
+    left: 50%;
+    margin-top: 8px;
+    margin-right:10px;
+}
+
+.hi {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.hi h1 {
+    font-family: $font;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.hi h1 {
+    font-family: $font;
+    text-shadow: 0 5px 17px rgba(0,0,0,0.30);
+    background: -webkit-linear-gradient(45deg, #7baaf9 1%,#7baaf9 34%,#8484fb 76%,#8484fb 76%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 100px;
+}
+
+.background-rectangles {
+    position: absolute;
+}
+
+
+@mixin cool-rectangle($width, $height, $marg-left, $marg-top, $gradient, $animation) {
+    width: $width;
+    height: $height;
+    position: absolute;
+    transform: rotate(-45deg);
+    margin-left: $marg-left;
+    margin-top: $marg-top;
+    background: $gradient;
+    box-shadow: 0 8px 29px rgba(0,0,0,0.25);
+    animation-name: $animation;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@function animation-name($name) {
+    @if $name == left{
+        @return fadeInLU;
+    } @else {
+        @return fadeInRD;
+    }
+    
+}
+
+@each $rect in $rectangles {
+    .background-rectangles .#{nth($rect, 1)} {
+        @include cool-rectangle(nth($rect, 2), nth($rect, 3), nth($rect, 4), nth($rect, 5), nth($rect, 6), animation-name(nth($rect, 7)));
+    }
+}
+
+
+.docker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-height: 360px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@keyframes fadeInRD {
+    from {
+        opacity: 0;
+        transform: translateX(-250px) translateY(250px) rotate(-45deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px) translateY(0px) rotate(-45deg);
+    }
+}
+
+@keyframes fadeInLU {
+    from {
+        opacity: 0;
+        transform: translateX(250px) translateY(-250px) rotate(-45deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px) translateY(0px) rotate(-45deg);
+    }
+}
+
+@keyframes cardAnimation {
+    from {
+        opacity: 0.5;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes buttonHover {
+
+    from {
+        transform: translateY(100px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+
+}
+
+
+
+
+
+
+
+
